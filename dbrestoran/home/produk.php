@@ -16,7 +16,6 @@
 
         }
     ?>
-    
 </div>
 <?php 
     $jumlahdata = $db->rowCOUNT("SELECT idmenu FROM tblmenu");

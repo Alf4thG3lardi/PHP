@@ -11,6 +11,24 @@
         session_destroy();
         header("location:index.php");
     }
+    function cart()
+    {
+        global $db;
+        $cart = 0;
+        foreach ($_SESSION as $key => $value) {
+            if ($key <> 'pelanggan' && $key <> 'idpelanggan') {
+                $id = substr($key, 1);
+                $sql = "SELECT * FROM tblmenu WHERE idmenu = $id";
+                $row = $db -> getALL($sql);
+
+                foreach ($row as $r) {
+                    $cart++;
+                }
+
+            }
+        }
+        return $cart;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +39,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resto | Home</title>
     <link rel="stylesheet" href="bootstrap-5.2.0-dist/css/bootstrap.css">
+    <style>
+        a {
+            text-decoration:none;
+        }
+    </style>
 </head>
 <body>
     <div class="container d-flex flex-column min-vh-100">
         <div class="row mt-4">
             <div class="col-md-3">
-                <h1><a style="text-decoration:none;" href="index.php">Restoran</a></h1>
+                <h1><a href="index.php">Restoran</a></h1>
             </div>
 
             <div class="col-md-9">
@@ -35,6 +58,8 @@
                         echo '
                             <div class="float-end mt-3 m-3"><a href="?log=logout">logout</a></div>
                             <div class="float-end mt-3 m-3">Pelanggan : <a href="?f=home&m=beli">'.$_SESSION['pelanggan'].'</a></div>                        
+                            <div class="float-end mt-3 m-3">Cart : (<a href="?f=home&m=beli">'.cart().'</a>)</div>                        
+                            <div class="float-end mt-3 m-3"><a href="?f=home&m=history">History </a></div>                        
                         ';
                     }
                     else {

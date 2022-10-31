@@ -17,6 +17,7 @@
     if (isset($_GET['hapus'])) {
         $id = $_GET['hapus'];
         unset($_SESSION['_'.$id]);
+        header("location:?f=home&m=beli");
     }
 
     if (!isset($_SESSION['pelanggan'])) {
@@ -53,6 +54,8 @@
     {
         global $db;
         $total = 0;
+        global $total;
+
         echo '
             <table class="table table-bordered w-80">
                 <tr>
@@ -92,3 +95,10 @@
     }
 
 ?>
+<?php 
+    if (!empty($total)) {
+    
+?>
+<a href="?f=home&m=checkout&total=<?php echo $total ?>" class="btn btn-primary">Checkout</a>
+
+<?php }?>
