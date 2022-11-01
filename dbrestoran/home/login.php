@@ -25,7 +25,7 @@
 
     if (isset($_POST['login'])) {
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = hash('sha256', $_POST['password']);
         // echo $email."--".$password;
 
         $sql = "SELECT * FROM tblpelanggan WHERE email = '$email' AND password = '$password' AND aktif = 1";

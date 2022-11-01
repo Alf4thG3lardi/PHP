@@ -39,12 +39,34 @@
         <div class="row mt-5">
             <div class="col-md-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="?f=kategori&m=select" class="nav-link">Kategori</a></li>
-                    <li class="nav-item"><a href="?f=menu&m=select" class="nav-link">Menu</a></li>
-                    <li class="nav-item"><a href="?f=pelanggan&m=select" class="nav-link">Pelanggan</a></li>
-                    <li class="nav-item"><a href="?f=order&m=select" class="nav-link">Order</a></li>
-                    <li class="nav-item"><a href="?f=orderdetail&m=select" class="nav-link">Order Details</a></li>
-                    <li class="nav-item"><a href="?f=user&m=select" class="nav-link">User</a></li>
+                    <?php 
+                        switch ($_SESSION['level']) {
+                            case 'admin':
+                                echo '
+                                <li class="nav-item"><a href="?f=kategori&m=select" class="nav-link">Kategori</a></li>
+                                <li class="nav-item"><a href="?f=menu&m=select" class="nav-link">Menu</a></li>
+                                <li class="nav-item"><a href="?f=pelanggan&m=select" class="nav-link">Pelanggan</a></li>
+                                <li class="nav-item"><a href="?f=order&m=select" class="nav-link">Order</a></li>
+                                <li class="nav-item"><a href="?f=orderdetail&m=select" class="nav-link">Order Details</a></li>
+                                <li class="nav-item"><a href="?f=user&m=select" class="nav-link">User</a></li>
+                                ';
+                                break;
+                            case 'kasir' :
+                                echo '
+                                <li class="nav-item"><a href="?f=order&m=select" class="nav-link">Order</a></li>
+                                <li class="nav-item"><a href="?f=orderdetail&m=select" class="nav-link">Order Details</a></li>
+                                ';
+                                break;
+                            case 'koki' :
+                                echo '
+                                <li class="nav-item"><a href="?f=orderdetail&m=select" class="nav-link">Order Details</a></li>
+                                ';
+                                break;
+                            default:
+                                
+                                break;
+                        }
+                    ?>
                 </ul>
             </div>
             <div class="col-md-9">
