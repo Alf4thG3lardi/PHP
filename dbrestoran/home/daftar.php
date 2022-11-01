@@ -38,8 +38,8 @@
         $alamat = $_POST['alamat'];
         $telp = $_POST['telp'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
-        $konfirmasi = $_POST['konfirmasi'];
+        $password = hash('sha256', $_POST['password']);
+        $konfirmasi =  hash('sha256', $_POST['konfirmasi']);
 
         if ($password == $konfirmasi) {
             $sql = "INSERT INTO tblpelanggan VALUES (null, '$pelanggan', '$alamat', '$telp', '$email', '$password', 1)";
